@@ -1,0 +1,268 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import test.Database;
+import test.SekreterId;
+
+public class login extends javax.swing.JFrame {
+
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
+    public login() {
+        initComponents();
+
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+
+        conn = Database.java_db();
+
+        currentDate();
+    }
+
+    public void currentDate() {
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        lbl_date.setText((month + 1) + "/" + (day) + "/" + (year));
+
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+
+        lbl_time.setText((hour) + ":" + (minute) + ":" + (second));
+
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        sifregöster_1 = new javax.swing.JRadioButton();
+        txt_username = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_password = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        lbl_date = new javax.swing.JMenu();
+        lbl_time = new javax.swing.JMenu();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hastane Randevu Sistemi\n");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jPanel2.setDoubleBuffered(false);
+        jPanel2.setLayout(null);
+
+        sifregöster_1.setBackground(new java.awt.Color(255, 255, 255));
+        sifregöster_1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        sifregöster_1.setText("Şifreyi göster");
+        sifregöster_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sifregöster_1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(sifregöster_1);
+        sifregöster_1.setBounds(430, 300, 140, 30);
+
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_usernameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(txt_username);
+        txt_username.setBounds(400, 220, 190, 30);
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Giriş Yap");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(330, 340, 300, 30);
+
+        jButton2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButton2.setText("Geri");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton2);
+        jButton2.setBounds(747, 442, 120, 50);
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel3.setText("Şifre : ");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(290, 270, 100, 23);
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel2.setText("Kullanıcı Adı : ");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(290, 230, 110, 23);
+        jPanel2.add(txt_password);
+        txt_password.setBounds(400, 260, 190, 30);
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel1.setText("Lütfen kullanıcı adınızı ve şifrenizi giriniz.");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(290, 190, 320, 23);
+
+        jLabel5.setFont(new java.awt.Font("Calibri", 3, 36)); // NOI18N
+        jLabel5.setText("MEHMET AKİF ERSOY ÜNİVERSİTE HASTANESİ ");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(140, 30, 710, 50);
+
+        jLabel7.setFont(new java.awt.Font("Calibri", 3, 36)); // NOI18N
+        jLabel7.setText("RANDEVU SİSTEMİ SEKRETER GİRİŞ SAYFASI");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(140, 80, 700, 60);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/images/sekreterlogin.jpg"))); // NOI18N
+        jLabel6.setText("jLabel6");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(-10, -60, 970, 640);
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        lbl_date.setText("Tarih");
+        jMenuBar1.add(lbl_date);
+
+        lbl_time.setText("Saat");
+        jMenuBar1.add(lbl_time);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+        conn = Database.java_db();
+
+        String sql = ("select * from Users where username ='" + txt_username.getText() + "' " + " and  password = '" + txt_password.getText() + "' ");
+
+        try {
+            int count = 0;
+            pst = conn.prepareStatement(sql);
+
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt(1);
+                SekreterId.sekId = id;
+                count = count + 1;
+                JOptionPane.showMessageDialog(null, "Giriş Başarılı.");
+                menu j = new menu();
+                this.dispose();
+                j.setVisible(true);
+                id = rs.getInt(1);
+                SekreterId.sekId = id;
+
+            }
+
+            if (count != 1) {
+                JOptionPane.showMessageDialog(null, "Kullanıcı adı veya şifre yanlış!");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+
+            }
+        }
+    }                                        
+
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {                                             
+
+    }                                            
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        this.setVisible(false);
+        new firstlogin().setVisible(true);
+    }                                        
+
+    private void sifregöster_1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        if (evt.getSource() == sifregöster_1) {
+            if (sifregöster_1.isSelected()) {
+                txt_password.setEchoChar((char) 0);
+            } else {
+                txt_password.setEchoChar('*');
+            }
+        }
+    }                                             
+
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new login().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenu lbl_date;
+    private javax.swing.JMenu lbl_time;
+    private javax.swing.JRadioButton sifregöster_1;
+    private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_username;
+    // End of variables declaration                   
+}
