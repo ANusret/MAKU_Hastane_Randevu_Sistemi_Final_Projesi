@@ -1,0 +1,8 @@
+package test;
+
+public class SekreterId {
+   
+    public static int sekId;
+    public static String sekName;
+    public static String hastaTc;
+}
