@@ -271,7 +271,7 @@ public class randevu_al extends javax.swing.JFrame {
         randevu_al.setBounds(500, 390, 140, 40);
 
         tarihsec.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        getContentPane().add(tarihsec);
+        getContentPane().add(tarihsec); 
         tarihsec.setBounds(180, 240, 130, 30);
 
         Temizle.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
