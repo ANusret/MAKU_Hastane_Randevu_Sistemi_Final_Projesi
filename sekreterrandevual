@@ -107,6 +107,74 @@ public class sekreter_randevu_al extends javax.swing.JFrame {
         }
 
     }
+    
+    private void fieldyazdir(){
+        try
+        {
+
+            String doktor = doktorsec.getSelectedItem().toString();
+            String bolumad = bolumsec.getSelectedItem().toString();
+            String[] doktor1 = doktor.split(" ");
+
+            infoarea.append("\n \n "+bolumad);
+            String sql="select * from Doktor where  doktorad = ?";
+
+            pst=conn.prepareStatement(sql);
+            pst.setString(1, doktor1[0]);
+            rs=pst.executeQuery();
+
+            String ad1=rs.getString("doktorad");
+            String ad2=rs.getString("doktorsoyad");
+            String ad4=rs.getString("doktoremail");
+            String ad5=rs.getString("doktortelefon");
+
+            infoarea.append(" \n \n"+
+                    "Randevu Bilgileri\n"+
+                    "Doktor adı: " + ad1 +"\n"+
+                    "Doktor soyadı: " + ad2 + "\n" +
+                    "Doktor email: " + ad4 + "\n" +
+                    "Doktor tel: " + ad5 + "\n"+
+                    "Randevu tarihi: " + tarihsec.getText()+"\n"+
+                    "Randevu saati: " + saatsec.getSelectedItem().toString()+"\n"
+                    );
+        }
+        catch(Exception ex)
+        {
+              JOptionPane.showMessageDialog(null, "Hata.");
+        }
+    }
+    
+    private void randevu_mod(String bolum){
+        try{
+            String doktor = doktorsec.getSelectedItem().toString();
+            String[] doktor1 = doktor.split(" ");
+            String sql = "insert into "+ bolum +" (hastatc,Saat,Doktorad,Doktorsoyad,Tarih) values (?,?,?,?,?) ";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, hastatc.getText());
+            pst.setString(2, saatsec.getSelectedItem().toString());
+            pst.setString(3,doktor1[0]);
+            pst.setString(4,doktor1[1]);
+            pst.setString(5, tarihsec.getText());
+
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Randevu başarıyla alındı.");
+
+
+
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally {
+                    try {
+                        rs.close();
+                        pst.close();
+                    } catch (Exception ex) {
+
+                    }
+                }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -368,57 +436,115 @@ public class sekreter_randevu_al extends javax.swing.JFrame {
         } else {
             if (x == 0 && a1.equals("Beyin ve sinir cerrahisi")) {
 
-                try {
-                    String doktor = doktorsec.getSelectedItem().toString();
-                    String[] doktor1 = doktor.split(" ");
-                    String sql = "insert into Beyinvesinircerrahisi (hastatc,Saat,Doktorad,Doktorsoyad,Tarih) values (?,?,?,?,?) ";
-                    pst = conn.prepareStatement(sql);
-                    pst.setString(1, hastatc.getText());
-                    pst.setString(2, saatsec.getSelectedItem().toString());
-                    pst.setString(3, doktor1[0]);
-                    pst.setString(4, doktor1[1]);
-                    pst.setString(5, tarihsec.getText());
+                randevu_mod("Beyinvesinircerrahisi");
+                fieldyazdir();
+            }
+            
+            
+            //2
+            if (x == 0 && a1.equals("Kardiyoloji")) {
+                randevu_mod("Kardiyoloji");
 
-                    pst.execute();
-                    JOptionPane.showMessageDialog(null, "Randevu başarıyla alındı.");
+                
+                fieldyazdir();
+            }
+            
+            
+            //3
+            if (x == 0 && a1.equals("Nöroloji")) {
+                randevu_mod("Noroloji");
 
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e);
-                }
-                try {
+                fieldyazdir();
+            }
+            
+            
+            //4
+            if (x == 0 && a1.equals("Psikoloji")) {
 
-                    String doktor = doktorsec.getSelectedItem().toString();
-                    String[] doktor1 = doktor.split(" ");
+                randevu_mod("Psikoloji");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //5
+            if (x == 0 && a1.equals("Üroloji")) {
 
-                    infoarea.append("\n \n Beyin ve sinir cerrahisi");
-                    String sql = "select * from Doktor where  doktorad = ?";
+                randevu_mod("Uroloji");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //6
+            if (x == 0 && a1.equals("Ağız ve diş sağlığı")) {
 
-                    pst = conn.prepareStatement(sql);
-                    pst.setString(1, doktor1[0]);
-                    rs = pst.executeQuery();
+                randevu_mod("Agizvedissagligi");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //7
+            if (x == 0 && a1.equals("Cildiye")) {
 
-                    String ad1 = rs.getString("doktorad");
-                    String ad2 = rs.getString("doktorsoyad");
-                    String ad4 = rs.getString("doktoremail");
-                    String ad5 = rs.getString("doktortelefon");
+                randevu_mod("Cildiye");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //8
+            if (x == 0 && a1.equals("Plastik cerrahi")) {
 
-                    infoarea.append(" \n \n"
-                            + "Randevu Bilgileri\n"
-                            + "Doktor adı: " + ad1 + "\n"
-                            + "Doktor soyadı: " + ad2 + "\n"
-                            + "Doktor email: " + ad4 + "\n"
-                            + "Doktor tel: " + ad5 + "\n"
-                    );
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Hata.");
-                } finally {
-                    try {
-                        rs.close();
-                        pst.close();
-                    } catch (Exception ex) {
+                randevu_mod("Plastikcerrahi");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //9
+            if (x == 0 && a1.equals("Genel cerrahi")) {
 
-                    }
-                }
+                randevu_mod("Genelcerrahi");
+                
+                fieldyazdir();
+            }
+            
+            
+            //10
+            if (x == 0 && a1.equals("Göz hastalıkları")) {
+
+                randevu_mod("Gozhastaliklari");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //11
+            if (x == 0 && a1.equals("Kulak burun boğaz")) {
+
+                randevu_mod("Kulakburunbogaz");
+                
+                fieldyazdir();
+            }
+            
+            
+            //12
+            if (x == 0 && a1.equals("İç hastalıkları")) {
+
+                randevu_mod("Ichastaliklari");
+                 
+                fieldyazdir();
+            }
+            
+            
+            //13
+            if (x == 0 && a1.equals("Kadın doğum")) {
+
+                randevu_mod("Kadindogum");
+                
+                fieldyazdir();
             }
         }
     }                                          
@@ -444,7 +570,7 @@ public class sekreter_randevu_al extends javax.swing.JFrame {
         doktorsec.addItem("Doktor seçiniz");
         saatsec.setSelectedIndex(0);
         tarihsec.setText("");
-
+        
     }                                       
 
     /**
